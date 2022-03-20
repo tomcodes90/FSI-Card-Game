@@ -2,7 +2,7 @@
 // Cards creation
 //
 class card {
-  constructor(name, fight, speed, intelligence, image) {
+  constructor(name, fight, speed, intelligence) {
     this.name = name;
     this.fight = fight;
     this.speed = speed;
@@ -74,9 +74,26 @@ class deck {
 const nameDiv = document.querySelector(".nameDiv");
 const namePrompt = document.querySelector("#nameInput");
 const nameButton = document.querySelector("#nameButton");
-const gameDiv = document.querySelector("#gameDiv");
+const playerName = document.querySelector("#playerName");
+const introDiv = document.querySelector(".introDiv");
 const welcomeMessage = document.querySelector("h1");
-const startGame = document.querySelector("button");
+const startGame = document.querySelector("#startGame");
+const gameDiv = document.querySelector(".gameDiv");
+const pickCard = document.querySelector("#pickCard");
+const challenge = document.querySelector("#challenge");
+//
+// DOM Player Cards Variables
+//
+const playerCard = document.querySelector("#p1Card");
+let playerCardName = document.querySelector("#p1CardName");
+let playerCardFight = document.querySelector("#p1CardFight");
+let playerCardSpeed = document.querySelector("#p1CardSpeed");
+let playerCardInt = document.querySelector("#p1CardInt");
+const computerCard = document.querySelector("#p2Card");
+let computerCardName = document.querySelector("#p2CardName");
+let computerCardFight = document.querySelector("#p2CardFight");
+let computerCardSpeed = document.querySelector("#p2CardSpeed");
+let computerCardInt = document.querySelector("#p2CardInt");
 
 //
 //Players creation
@@ -91,11 +108,13 @@ class player {
 let computer = new player();
 computer.name = "Traveller";
 let player1 = new player();
+let limbo = [];
 nameButton.addEventListener("click", () => {
   player1.name = namePrompt.value;
+  playerName.textContent = `${player1.name}`;
   nameDiv.classList.add("noDisplay");
-  gameDiv.classList.remove("noDisplay");
-  welcomeMessage.textContent = `Welcome ${player1.name}, Get ready for a card battle!!`;
+  introDiv.classList.remove("noDisplay");
+  welcomeMessage.innerHTML = ` ${player1.name}... Let's play a <br /> Cards game!!`;
 });
 
 //
@@ -106,22 +125,78 @@ startGame.addEventListener("click", () => {
   freshDeck.shuffleDeck();
   player1.Deck = freshDeck.cards.slice(0, 10);
   computer.Deck = freshDeck.cards.slice(10, 20);
-  gameDiv.classList.add("noDisplay");
+  introDiv.classList.add("noDisplay");
+  gameDiv.classList.remove("noDisplay");
+  console.log(player1);
+  console.log(computer);
 });
 
-// Game logic
+pickCard.addEventListener("click", () => {
+  player1.Card = player1.Deck.shift();
+  computer.Card = computer.Deck.shift();
+  playerCard.classList.remove("hideDisplay");
+  playerCardName.innerHTML = `${player1.Card.name}`;
+  playerCardFight.innerHTML = `Fight: ${player1.Card.fight}`;
+  playerCardSpeed.innerHTML = `Speed: ${player1.Card.speed}`;
+  playerCardInt.innerHTML = `Int: ${player1.Card.intelligence}`;
+  computerCardName.innerHTML = `${computer.Card.name}`;
+  computerCardFight.innerHTML = `Fight: ${computer.Card.fight}`;
+  computerCardSpeed.innerHTML = `Speed: ${computer.Card.speed}`;
+  computerCardInt.innerHTML = `Int: ${computer.Card.intelligence}`;
+  pickCard.classList.add("noDisplay");
+  challenge.classList.remove("noDisplay");
+});
+playerCardFight.addEventListener("click", () => {
+  playerCardFight.classList.add("attrSelection");
+  playerCardSpeed.classList.remove("attrSelection");
+  playerCardInt.classList.remove("attrSelection");
+  computerCardFight.classList.add("attrSelection");
+  computerCardSpeed.classList.remove("attrSelection");
+  computerCardInt.classList.remove("attrSelection");
+  challenge.addEventListener("click", () => {
+    computerCard.classList.remove("hideDisplay");
+    if (player1.Card.fight > computer.Card.fight) {
+      console.log("You win");
+    } else {
+      console.log("You lose");
+    }
+  });
+});
+playerCardSpeed.addEventListener("click", () => {
+  playerCardFight.classList.remove("attrSelection");
+  playerCardSpeed.classList.add("attrSelection");
+  playerCardInt.classList.remove("attrSelection");
+  computerCardFight.classList.remove("attrSelection");
+  computerCardSpeed.classList.add("attrSelection");
+  computerCardInt.classList.remove("attrSelection");
+  challenge.addEventListener("click", () => {
+    computerCard.classList.remove("hideDisplay");
+    if (player1.Card.speed > computer.Card.speed) {
+      console.log("You win");
+    } else {
+      console.log("You lose");
+    }
+  });
+});
+playerCardInt.addEventListener("click", () => {
+  playerCardFight.classList.remove("attrSelection");
+  playerCardSpeed.classList.remove("attrSelection");
+  playerCardInt.classList.add("attrSelection");
+  computerCardFight.classList.remove("attrSelection");
+  computerCardSpeed.classList.remove("attrSelection");
+  computerCardInt.classList.add("attrSelection");
+  challenge.addEventListener("click", () => {
+    computerCard.classList.remove("hideDisplay");
+    if (player1.Card.intelligence > computer.Card.intelligence) {
+      console.log("You win");
+    } else {
+      console.log("You lose");
+    }
+  });
+});
 
-// let freshDeck = new Deck();
-// freshDeck.createDeck();
-// freshDeck.shuffleDeck();
-// const player1 = new player("player1");
-// const player2 = new player("player2");
-// player1.playerDeck = freshDeck.cards.slice(0, 10);
-// player2.playerDeck = freshDeck.cards.slice(10, 20);
-// let limbo = [];
-// while (player1.playerDeck.length != 0 && player2.playerDeck.length != 0) {
-//   player1.playerCard = player1.playerDeck.shift();
-//   player2.playerCard = player2.playerDeck.shift();
+//(player1.playerDeck.length != 0 && player2.playerDeck.length != 0) {
+
 //   console.log(player1.playerCard);
 //   console.log(player2.playerCard);
 //   if (player1.playerCard.value > player2.playerCard.value) {

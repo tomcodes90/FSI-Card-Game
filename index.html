@@ -14,9 +14,13 @@
     />
   </head>
   <body>
+    <! --INTRO SECTION-->
     <div class="nameDiv">
       <h2 class="greetings1">Greetings traveller</h2>
-      <p class="greetings2">Please, Tell me.. what's your name?</p>
+      <p class="greetings2">
+        Please, Tell me.. <br />
+        what's your name?
+      </p>
       <input
         type="text"
         name=""
@@ -26,9 +30,44 @@
       />
       <input type="button" name="" id="nameButton" value="Send" />
     </div>
-    <div class="noDisplay" id="gameDiv">
+    <div class="introDiv noDisplay">
       <h1></h1>
-      <button>START GAME</button>
+      <button id="startGame">START GAME</button>
+    </div>
+    <! --GAME SECTION-->
+    <div class="gameDiv noDisplay">
+      <div class="computerDeck">
+        <p id="computerName">traveller</p>
+        <hr />
+      </div>
+      <div class="inPlayCards">
+        <button id="pickCard">Pick a card</button>
+        <button id="challenge" class="noDisplay">Challenge</button>
+        <div id="p1Card" class="hideDisplay">
+          <p id="p1CardName"></p>
+          <img id="p1CardImg" src="./images/cardExample.png" alt="" />
+          <div id="p1CardAttr">
+            <p id="p1CardFight"></p>
+            <p id="p1CardSpeed"></p>
+            <p id="p1CardInt"></p>
+          </div>
+        </div>
+        <div id="p2Card" class="hideDisplay">
+          <p id="p2CardName"></p>
+          <img id="p2CardImg" src="./images/cardExample.png" alt="" />
+          <div id="p2CardAttr">
+            <p id="p2CardName"></p>
+            <p id="p2CardFight"></p>
+            <p id="p2CardSpeed"></p>
+            <p id="p2CardInt"></p>
+          </div>
+        </div>
+        <div id="gameStatus"></div>
+      </div>
+      <div class="playerDeck">
+        <p id="playerName"></p>
+        <hr />
+      </div>
     </div>
     <script src="./script.js"></script>
   </body>
