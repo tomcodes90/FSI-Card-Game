@@ -133,6 +133,9 @@ startGame.addEventListener("click", () => {
   computer.Deck = freshDeck.cards.slice(10, 20);
   introDiv.classList.add("noDisplay");
   gameDiv.classList.remove("noDisplay");
+  playerStatus.textContent =
+    `${player1.name} ` + `Cards: ${player1.Deck.length}`;
+  computerStatus.textContent = `Traveller ` + `Cards: ${computer.Deck.length}`;
   gameStatus.textContent = `Pick a card!`;
   console.log(player1);
   console.log(computer);
