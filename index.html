@@ -26,12 +26,15 @@
         name=""
         placeholder="Please insert your name..."
         autocomplete="off"
+        maxlength="10"
         id="nameInput"
       />
       <input type="button" name="" id="nameButton" value="Send" />
     </div>
     <div class="introDiv noDisplay">
       <h1></h1>
+      <hr />
+      <hr />
       <button id="startGame">START GAME</button>
     </div>
     <! --GAME SECTION-->
@@ -42,7 +45,7 @@
       </div>
       <div class="inPlayCards">
         <button id="pickCard">Pick a card</button>
-        <button id="challenge" class="noDisplay">Challenge</button>
+        <button id="playTurn" class="noDisplay">Play</button>
         <div id="p1Card" class="hideDisplay">
           <p id="p1CardName"></p>
           <img id="p1CardImg" src="./images/cardExample.png" alt="" />
@@ -51,6 +54,11 @@
             <p id="p1CardSpeed"></p>
             <p id="p1CardInt"></p>
           </div>
+        </div>
+        <div id="gameMessage">
+          <p id="playerStatus"></p>
+          <p id="computerStatus"></p>
+          <p id="gameStatus"></p>
         </div>
         <div id="p2Card" class="hideDisplay">
           <p id="p2CardName"></p>
@@ -62,7 +70,6 @@
             <p id="p2CardInt"></p>
           </div>
         </div>
-        <div id="gameStatus"></div>
       </div>
       <div class="playerDeck">
         <p id="playerName"></p>
