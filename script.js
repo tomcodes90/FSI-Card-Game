@@ -2,12 +2,12 @@
 // Cards creation
 //
 class card {
-  constructor(name, fight, speed, intelligence, src) {
+  constructor(name, fight, speed, intelligence, img) {
     this.name = name;
     this.fight = fight;
     this.speed = speed;
     this.intelligence = intelligence;
-    this.img;
+    this.img = img;
   }
 }
 const sTiger = new card("Baby Tiger", 6, 4, 2, "/images/baby.tiger.jpg");
@@ -151,7 +151,7 @@ pickCard.addEventListener("click", () => {
   playerCardFight.innerHTML = `Fight: ${player1.Card.fight}`;
   playerCardSpeed.innerHTML = `Speed: ${player1.Card.speed}`;
   playerCardInt.innerHTML = `Int: ${player1.Card.intelligence}`;
-  document.getElementById("p1CardImg").src = player1.Card.img;
+  document.getElementById("p1CardImg").src = `${player1.Card.img}`;
   computerCardName.innerHTML = `${computer.Card.name}`;
   computerCardFight.innerHTML = `Fight: ${computer.Card.fight}`;
   computerCardSpeed.innerHTML = `Speed: ${computer.Card.speed}`;
@@ -164,6 +164,9 @@ pickCard.addEventListener("click", () => {
   playerCardSpeed.classList.remove("attrSelection");
   playerCardInt.classList.remove("attrSelection");
   gameStatus.textContent = `Fight, run or outsmart your enemy!`;
+  playerStatus.textContent =
+    `${player1.name} ` + `Cards: ${player1.Deck.length}`;
+  computerStatus.textContent = `Traveller ` + `Cards: ${computer.Deck.length}`;
 });
 playerCardFight.addEventListener("click", () => {
   playerCardFight.classList.add("attrSelection");
@@ -177,25 +180,28 @@ playerCardFight.addEventListener("click", () => {
     computerCard.classList.remove("hideDisplay");
     pickCard.classList.remove("noDisplay");
     playTurn.classList.add("noDisplay");
-    if (player1.Card.fight.value > computer.Card.fight.value) {
+    if (player1.Card.fight > computer.Card.fight) {
       gameStatus.textContent = `${player1.name} wins the round!`;
       player1.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         player1.Deck.push(...limbo);
         limbo = [];
       }
-    } else if (player1.Card.fight.value < computer.Card.fight.value) {
+    } else if (player1.Card.fight < computer.Card.fight) {
       gameStatus.textContent = `Traveller wins the round!`;
       computer.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         computer.Deck.push(...limbo);
         limbo = [];
       }
-    } else if (player1.Card.fight.value == computer.Card.fight.value) {
+    } else if (player1.Card.fight === computer.Card.fight) {
       limbo.push(player1.Card, computer.Card);
       gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
     }
   });
+
+  console.log(computer);
+  console.log(player1);
 });
 
 playerCardSpeed.addEventListener("click", () => {
@@ -244,16 +250,16 @@ playerCardInt.addEventListener("click", () => {
         player1.Deck.push(...limbo);
         limbo = [];
         console.log("You win");
-      } else if (
-        player1.Card.intelligence.value < computer.Card.intelligence.value
-      ) {
+      }
+      if (player1.Card.intelligence.value < computer.Card.intelligence.value) {
         computer.Deck.push(player1.Card, computer.Card);
         if (limbo.length != 0) {
           computer.Deck.push(...limbo);
           limbo = [];
           console.log("You lose");
         }
-      } else if (
+      }
+      if (
         player1.Card.intelligence.value === computer.Card.intelligence.value
       ) {
         limbo.push(player1.Card, computer.Card);
