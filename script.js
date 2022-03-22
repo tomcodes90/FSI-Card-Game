@@ -7,29 +7,29 @@ class card {
     this.fight = fight;
     this.speed = speed;
     this.intelligence = intelligence;
-    this.src;
+    this.img;
   }
 }
-const sTiger = new card("Baby Tiger", 6, 4, 2);
-const mTiger = new card("Young Tiger", 8, 6, 3);
-const xTiger = new card("Adult Tiger", 10, 7, 5);
-const sLion = new card("Baby Lion", 6, 3, 3);
-const mLion = new card("Young Lion", 8, 5, 5);
-const xLion = new card("Adult Lion", 10, 6, 6);
-const sLeopard = new card("Baby Leopard", 3, 6, 2);
-const mLeopard = new card("Young Leopard", 5, 8, 4);
-const xLeopard = new card("Adult Leopard", 7, 10, 6);
-const sFox = new card("Baby fox", 2, 5, 7);
-const xFox = new card("Fox", 3, 6, 10);
-const turtle = new card("Turtle", 2, 1, 7);
-const sHorse = new card("Baby Horse", 4, 6, 4);
-const xHorse = new card("Horse", 6, 9, 8);
-const sGiraffe = new card("Baby Giraffe", 5, 3, 5);
-const xGiraffe = new card("Giraffe", 8, 5, 7);
-const sRhino = new card("Baby Rhino", 5, 2, 3);
-const xRhino = new card("Rhino", 10, 4, 5);
-const hawk = new card("Hawk", 3, 8, 9);
-const dragon = new card("Dragon", 11, 7, 6);
+const sTiger = new card("Baby Tiger", 6, 4, 2, "/images/baby.tiger.jpg");
+const mTiger = new card("Young Tiger", 8, 6, 3, "/images/baby.tiger.jpg");
+const xTiger = new card("Adult Tiger", 10, 7, 5, "/images/baby.tiger.jpg");
+const sLion = new card("Baby Lion", 6, 3, 3, "/images/baby.tiger.jpg");
+const mLion = new card("Young Lion", 8, 5, 5, "/images/baby.tiger.jpg");
+const xLion = new card("Adult Lion", 10, 6, 6, "/images/baby.tiger.jpg");
+const sLeopard = new card("Baby Leopard", 3, 6, 2, "/images/baby.tiger.jpg");
+const mLeopard = new card("Young Leopard", 5, 8, 4, "/images/baby.tiger.jpg");
+const xLeopard = new card("Adult Leopard", 7, 10, 6, "/images/baby.tiger.jpg");
+const sFox = new card("Baby fox", 2, 5, 7, "/images/baby.tiger.jpg");
+const xFox = new card("Fox", 3, 6, 10, "/images/baby.tiger.jpg");
+const turtle = new card("Turtle", 2, 1, 7, "/images/baby.tiger.jpg");
+const sHorse = new card("Baby Horse", 4, 6, 4, "/images/baby.tiger.jpg");
+const xHorse = new card("Horse", 6, 9, 8, "/images/baby.tiger.jpg");
+const sGiraffe = new card("Baby Giraffe", 5, 3, 5, "/images/baby.tiger.jpg");
+const xGiraffe = new card("Giraffe", 8, 5, 7, "/images/baby.tiger.jpg");
+const sRhino = new card("Baby Rhino", 5, 2, 3, "/images/baby.tiger.jpg");
+const xRhino = new card("Rhino", 10, 4, 5, "/images/baby.tiger.jpg");
+const hawk = new card("Hawk", 3, 8, 9, "/images/baby.tiger.jpg");
+const dragon = new card("Dragon", 11, 7, 6, "/images/baby.tiger.jpg");
 //
 // Deck creation
 //
@@ -94,6 +94,7 @@ let playerCardName = document.querySelector("#p1CardName");
 let playerCardFight = document.querySelector("#p1CardFight");
 let playerCardSpeed = document.querySelector("#p1CardSpeed");
 let playerCardInt = document.querySelector("#p1CardInt");
+
 const computerCard = document.querySelector("#p2Card");
 let computerCardName = document.querySelector("#p2CardName");
 let computerCardFight = document.querySelector("#p2CardFight");
@@ -150,10 +151,12 @@ pickCard.addEventListener("click", () => {
   playerCardFight.innerHTML = `Fight: ${player1.Card.fight}`;
   playerCardSpeed.innerHTML = `Speed: ${player1.Card.speed}`;
   playerCardInt.innerHTML = `Int: ${player1.Card.intelligence}`;
+  document.getElementById("p1CardImg").src = player1.Card.img;
   computerCardName.innerHTML = `${computer.Card.name}`;
   computerCardFight.innerHTML = `Fight: ${computer.Card.fight}`;
   computerCardSpeed.innerHTML = `Speed: ${computer.Card.speed}`;
   computerCardInt.innerHTML = `Int: ${computer.Card.intelligence}`;
+  document.getElementById("p2CardImg").src = computer.Card.img;
   pickCard.classList.add("noDisplay");
   playTurn.classList.remove("noDisplay");
   computerCard.classList.add("hideDisplay");
