@@ -10,26 +10,26 @@ class card {
     this.img = img;
   }
 }
-const sTiger = new card("Baby Tiger", 6, 4, 2, "/images/baby.tiger.jpg");
-const mTiger = new card("Young Tiger", 8, 6, 3, "/images/baby.tiger.jpg");
-const xTiger = new card("Adult Tiger", 10, 7, 5, "/images/baby.tiger.jpg");
-const sLion = new card("Baby Lion", 6, 3, 3, "/images/baby.tiger.jpg");
-const mLion = new card("Young Lion", 8, 5, 5, "/images/baby.tiger.jpg");
-const xLion = new card("Adult Lion", 10, 6, 6, "/images/baby.tiger.jpg");
-const sLeopard = new card("Baby Leopard", 3, 6, 2, "/images/baby.tiger.jpg");
-const mLeopard = new card("Young Leopard", 5, 8, 4, "/images/baby.tiger.jpg");
-const xLeopard = new card("Adult Leopard", 7, 10, 6, "/images/baby.tiger.jpg");
-const sFox = new card("Baby fox", 2, 5, 7, "/images/baby.tiger.jpg");
-const xFox = new card("Fox", 3, 6, 10, "/images/baby.tiger.jpg");
-const turtle = new card("Turtle", 2, 1, 7, "/images/baby.tiger.jpg");
-const sHorse = new card("Baby Horse", 4, 6, 4, "/images/baby.tiger.jpg");
-const xHorse = new card("Horse", 6, 9, 8, "/images/baby.tiger.jpg");
-const sGiraffe = new card("Baby Giraffe", 5, 3, 5, "/images/baby.tiger.jpg");
-const xGiraffe = new card("Giraffe", 8, 5, 7, "/images/baby.tiger.jpg");
-const sRhino = new card("Baby Rhino", 5, 2, 3, "/images/baby.tiger.jpg");
-const xRhino = new card("Rhino", 10, 4, 5, "/images/baby.tiger.jpg");
-const hawk = new card("Hawk", 3, 8, 9, "/images/baby.tiger.jpg");
-const dragon = new card("Dragon", 11, 7, 6, "/images/baby.tiger.jpg");
+const sTiger = new card("Baby Tiger", 6, 4, 2, "./images/baby.tiger.jpg");
+const mTiger = new card("Young Tiger", 8, 6, 3, "./images/baby.tiger.jpg");
+const xTiger = new card("Adult Tiger", 10, 7, 5, "./images/baby.tiger.jpg");
+const sLion = new card("Baby Lion", 6, 3, 3, "./images/baby.tiger.jpg");
+const mLion = new card("Young Lion", 8, 5, 5, "./images/baby.tiger.jpg");
+const xLion = new card("Adult Lion", 10, 6, 6, "./images/baby.tiger.jpg");
+const sLeopard = new card("Baby Leopard", 3, 6, 2, "./images/baby.tiger.jpg");
+const mLeopard = new card("Young Leopard", 5, 8, 4, "./images/baby.tiger.jpg");
+const xLeopard = new card("Adult Leopard", 7, 10, 6, "./images/baby.tiger.jpg");
+const sFox = new card("Baby fox", 2, 5, 7, "./images/baby.tiger.jpg");
+const xFox = new card("Fox", 3, 6, 10, "./images/baby.tiger.jpg");
+const turtle = new card("Turtle", 2, 1, 7, "./images/baby.tiger.jpg");
+const sHorse = new card("Baby Horse", 4, 6, 4, "./images/baby.tiger.jpg");
+const xHorse = new card("Horse", 6, 9, 8, "./images/baby.tiger.jpg");
+const sGiraffe = new card("Baby Giraffe", 5, 3, 5, "./images/baby.tiger.jpg");
+const xGiraffe = new card("Giraffe", 8, 5, 7, "./images/baby.tiger.jpg");
+const sRhino = new card("Baby Rhino", 5, 2, 3, "./images/baby.tiger.jpg");
+const xRhino = new card("Rhino", 10, 4, 5, "./images/baby.tiger.jpg");
+const hawk = new card("Hawk", 3, 8, 9, "./images/baby.tiger.jpg");
+const dragon = new card("Dragon", 11, 7, 6, "./images/baby.tiger.jpg");
 //
 // Deck creation
 //
