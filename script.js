@@ -85,10 +85,13 @@ const playTurn = document.querySelector("#playTurn");
 let playerStatus = document.querySelector("#playerStatus");
 let computerStatus = document.querySelector("#computerStatus");
 <<<<<<< HEAD
+<<<<<<< HEAD
 let limboStatus = document.querySelector("#limboStatus");
 let bottomDeck = document.querySelector(".playerDeck");
 let topDeck = document.querySelector(".computerDeck");
 =======
+=======
+>>>>>>> parent of ab80589 (fixing game logic)
 
 const gameStatus = document.querySelector("#gameStatus");
 >>>>>>> parent of ab80589 (fixing game logic)
@@ -238,6 +241,9 @@ startGame.addEventListener("click", () => {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> parent of ab80589 (fixing game logic)
+=======
 >>>>>>> parent of ab80589 (fixing game logic)
 pickCard.addEventListener("click", () => {
   playerCard.classList.remove("noClick");
@@ -264,16 +270,22 @@ pickCard.addEventListener("click", () => {
   playerCardSpeed.classList.remove("attrSelection");
   playerCardInt.classList.remove("attrSelection");
   gameStatus.textContent = `Fight, run or outsmart your enemy!`;
+<<<<<<< HEAD
+>>>>>>> parent of ab80589 (fixing game logic)
+=======
 >>>>>>> parent of ab80589 (fixing game logic)
   playerStatus.textContent =
     `${player1.name} ` + `Cards: ${player1.Deck.length}`;
   computerStatus.textContent = `Traveller ` + `Cards: ${computer.Deck.length}`;
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // End game
 //
 =======
+=======
+>>>>>>> parent of ab80589 (fixing game logic)
 playerCardFight.addEventListener("click", () => {
   playerCardFight.classList.add("attrSelection");
   playerCardSpeed.classList.remove("attrSelection");
@@ -374,6 +386,9 @@ playerCardInt.addEventListener("click", () => {
     }
   });
 });
+<<<<<<< HEAD
+>>>>>>> parent of ab80589 (fixing game logic)
+=======
 >>>>>>> parent of ab80589 (fixing game logic)
 
 //(player1.playerDeck.length != 0 && player2.playerDeck.length != 0) {
