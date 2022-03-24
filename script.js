@@ -87,10 +87,8 @@ const playChallenge = document.querySelector("#playChallenge");
 let playerStatus = document.querySelector("#playerStatus");
 let computerStatus = document.querySelector("#computerStatus");
 let limboStatus = document.querySelector("#limboStatus");
-let playerDeck = document.querySelector(".playerDeck");
-let computerDeck = document.querySelector(".computerDeck");
-
-const gameStatus = document.querySelector("#gameStatus");
+let bottomDeck = document.querySelector(".playerDeck");
+let topDeck = document.querySelector(".computerDeck");
 //
 // DOM Player Cards Variables
 //
@@ -115,20 +113,108 @@ class player {
     this.Deck;
     this.Card;
   }
+  fight() {
+    if ((playerTurn = true)) {
+      fightChallenge.addEventListener("click", () => {
+        computerCard.classList.remove("hideDisplay");
+        pickCard.classList.remove("noDisplay");
+        fightChallenge.classList.add("noDisplay");
+        runChallenge.classList.add("noDisplay");
+        playChallenge.classList.add("noDisplay");
+        if (player1.Card.fight > computer.Card.fight) {
+          gameStatus.textContent = `${player1.name} wins the round!`;
+          player1.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            player1.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.fight < computer.Card.fight) {
+          gameStatus.textContent = `Traveller wins the round!`;
+          computer.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            computer.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.fight === computer.Card.fight) {
+          limbo.push(player1.Card, computer.Card);
+          gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
+        }
+      });
+    }
+  }
+  run() {
+    if ((playerTurn = true)) {
+      runChallenge.addEventListener("click", () => {
+        computerCard.classList.remove("hideDisplay");
+        pickCard.classList.remove("noDisplay");
+        fightChallenge.classList.add("noDisplay");
+        runChallenge.classList.add("noDisplay");
+        playChallenge.classList.add("noDisplay");
+        if (player1.Card.speed > computer.Card.speed) {
+          gameStatus.textContent = `${player1.name} wins the round!`;
+          player1.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            player1.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.speed < computer.Card.speed) {
+          gameStatus.textContent = `Traveller wins the round!`;
+          computer.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            computer.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.speed === computer.Card.speed) {
+          limbo.push(player1.Card, computer.Card);
+          gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
+          console.log(computer);
+          console.log(player1);
+          console.log(computer.Card);
+          console.log(player1.Card);
+        }
+      });
+    }
+  }
+  trick() {
+    if ((playerTurn = true)) {
+      playChallenge.addEventListener("click", () => {
+        computerCard.classList.remove("hideDisplay");
+        pickCard.classList.remove("noDisplay");
+        fightChallenge.classList.add("noDisplay");
+        runChallenge.classList.add("noDisplay");
+        playChallenge.classList.add("noDisplay");
+        if (player1.Card.intelligence > computer.Card.intelligence) {
+          gameStatus.textContent = `${player1.name} wins the round!`;
+          player1.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            player1.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.intelligence < computer.Card.intelligence) {
+          gameStatus.textContent = `Traveller wins the round!`;
+          computer.Deck.push(player1.Card, computer.Card);
+          if (limbo.length != 0) {
+            computer.Deck.push(...limbo);
+            limbo = [];
+          }
+        } else if (player1.Card.intelligence === computer.Card.intelligence) {
+          limbo.push(player1.Card, computer.Card);
+          gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
+        }
+        console.log(computer);
+        console.log(player1);
+        console.log(computer.Card);
+        console.log(player1.Card);
+      });
+    }
+  }
 }
+
 let computer = new player();
 computer.name = "Traveller";
 let player1 = new player();
 let limbo = [];
-
-let currentplayer = nameButton.addEventListener("click", () => {
-  player1.name = namePrompt.value;
-  playerName.textContent = `${player1.name}`;
-  nameDiv.classList.add("noDisplay");
-  introDiv.classList.remove("noDisplay");
-  welcomeMessage.innerHTML = ` ${player1.name}... Let's play a <br /> Cards game!!`;
-});
-
+let playerTurn = true;
 //
 //Function to start the game
 //
@@ -147,15 +233,6 @@ startGame.addEventListener("click", () => {
   console.log(player1);
   console.log(computer);
 });
-
-//
-//Section to display the two player's decks
-//
-
-//
-//Game Logic
-//
-
 pickCard.addEventListener("click", () => {
   playerCard.classList.remove("noClick");
   player1.Card = player1.Deck.shift();
@@ -176,9 +253,6 @@ pickCard.addEventListener("click", () => {
   runChallenge.classList.remove("noDisplay");
   playChallenge.classList.remove("noDisplay");
   computerCard.classList.add("hideDisplay");
-  playerCardFight.classList.remove("attrSelection");
-  playerCardSpeed.classList.remove("attrSelection");
-  playerCardInt.classList.remove("attrSelection");
   gameStatus.textContent = `Fight, run or outplay your enemy!`;
   playerStatus.textContent =
     `${player1.name} ` + `Cards: ${player1.Deck.length}`;
@@ -187,95 +261,6 @@ pickCard.addEventListener("click", () => {
   console.log(`player 1 card ${player1.Card}`);
   console.log(`computer card ${computer.Card}`);
   console.log(`computer card ${limbo}`);
-});
-
-fightChallenge.addEventListener("click", () => {
-  computerCard.classList.remove("hideDisplay");
-  pickCard.classList.remove("noDisplay");
-  fightChallenge.classList.add("noDisplay");
-  runChallenge.classList.add("noDisplay");
-  playChallenge.classList.add("noDisplay");
-  if (player1.Card.fight > computer.Card.fight) {
-    gameStatus.textContent = `${player1.name} wins the round!`;
-    player1.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      player1.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.fight < computer.Card.fight) {
-    gameStatus.textContent = `Traveller wins the round!`;
-    computer.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      computer.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.fight === computer.Card.fight) {
-    limbo.push(player1.Card, computer.Card);
-    gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
-  }
-
-  console.log(computer);
-  console.log(player1);
-  console.log(computer.Card);
-  console.log(player1.Card);
-});
-runChallenge.addEventListener("click", () => {
-  computerCard.classList.remove("hideDisplay");
-  pickCard.classList.remove("noDisplay");
-  fightChallenge.classList.add("noDisplay");
-  runChallenge.classList.add("noDisplay");
-  playChallenge.classList.add("noDisplay");
-  if (player1.Card.speed > computer.Card.speed) {
-    gameStatus.textContent = `${player1.name} wins the round!`;
-    player1.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      player1.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.speed < computer.Card.speed) {
-    gameStatus.textContent = `Traveller wins the round!`;
-    computer.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      computer.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.speed === computer.Card.speed) {
-    limbo.push(player1.Card, computer.Card);
-    gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
-    console.log(computer);
-    console.log(player1);
-    console.log(computer.Card);
-    console.log(player1.Card);
-  }
-});
-playChallenge.addEventListener("click", () => {
-  computerCard.classList.remove("hideDisplay");
-  pickCard.classList.remove("noDisplay");
-  fightChallenge.classList.add("noDisplay");
-  runChallenge.classList.add("noDisplay");
-  playChallenge.classList.add("noDisplay");
-  if (player1.Card.intelligence > computer.Card.intelligence) {
-    gameStatus.textContent = `${player1.name} wins the round!`;
-    player1.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      player1.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.intelligence < computer.Card.intelligence) {
-    gameStatus.textContent = `Traveller wins the round!`;
-    computer.Deck.push(player1.Card, computer.Card);
-    if (limbo.length != 0) {
-      computer.Deck.push(...limbo);
-      limbo = [];
-    }
-  } else if (player1.Card.intelligence === computer.Card.intelligence) {
-    limbo.push(player1.Card, computer.Card);
-    gameStatus.textContent = `Draw! card in the limbo!! who wins the next round will get them!!`;
-  }
-  console.log(computer);
-  console.log(player1);
-  console.log(computer.Card);
-  console.log(player1.Card);
 });
 //
 // End game
