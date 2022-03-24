@@ -125,6 +125,7 @@ button {
   font-family: "Alegreya SC";
   padding: 10px 10px;
 }
+
 #p1Card img,
 #p2Card img {
   padding: 5px 0px;
@@ -135,4 +136,14 @@ button {
 #p2CardName {
   font-weight: bold;
   text-align: center;
+}
+
+#p1CardFight,
+#p1CardSpeed,
+#p1CardInt {
+  cursor: pointer;
+}
+.attrSelection {
+  text-decoration: underline;
+  font-weight: bold;
 }
