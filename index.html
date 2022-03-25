@@ -40,22 +40,16 @@
     <! --GAME SECTION-->
     <div class="gameDiv noDisplay">
       <div class="computerDeck">
-        <p id="computerName">traveller</p>
+        <p id="computerName">Traveller</p>
         <hr />
       </div>
       <div class="inPlayCards">
-        <button id="pickCard">Pick a card</button>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <button id="fightChallenge" class="noDisplay">Fight</button>
-        <button id="runChallenge" class="noDisplay">Run</button>
-        <button id="playChallenge" class="noDisplay">Trick</button>
-=======
-        <button id="playTurn" class="noDisplay">Play</button>
->>>>>>> parent of ab80589 (fixing game logic)
-=======
-        <button id="playTurn" class="noDisplay">Play</button>
->>>>>>> parent of ab80589 (fixing game logic)
+        <div class="playButtons">
+          <button id="pickCard">Pick a card</button>
+          <button id="fightChallenge" class="noDisplay">Fight</button>
+          <button id="runChallenge" class="noDisplay">Run</button>
+          <button id="playChallenge" class="noDisplay">Trick</button>
+        </div>
         <div id="p1Card" class="hideDisplay">
           <p id="p1CardName"></p>
           <img id="p1CardImg" />
@@ -68,6 +62,7 @@
         <div id="gameMessage">
           <p id="playerStatus"></p>
           <p id="computerStatus"></p>
+          <p id="limboStatus"></p>
           <p id="gameStatus"></p>
         </div>
         <div id="p2Card" class="hideDisplay">
@@ -82,8 +77,11 @@
         </div>
       </div>
       <div class="playerDeck">
-        <p id="playerName"></p>
+        <div>
+          <p id="playerName"></p>
+        </div>
         <hr />
+        <div id="bottomDeck"></div>
       </div>
     </div>
     <script src="./script.js"></script>
