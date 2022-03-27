@@ -33,8 +33,6 @@
     </div>
     <div class="introDiv noDisplay">
       <h1></h1>
-      <hr />
-      <hr />
       <button id="startGame">START GAME</button>
     </div>
     <! --GAME SECTION-->
@@ -48,10 +46,12 @@
       </div>
       <div class="inPlayCards">
         <div class="playButtons">
-          <button id="pickCard">Pick a card</button>
+          <button id="flipCoin" class="noDisplay">Flip the coin</button>
+          <button id="pickCard" class="noDisplay">Pick a card</button>
           <button id="fightChallenge" class="noDisplay">Fight</button>
           <button id="runChallenge" class="noDisplay">Run</button>
           <button id="playChallenge" class="noDisplay">Trick</button>
+          <button id="computerRound" class="noDisplay">Next Round</button>
         </div>
         <div id="p1Card" class="hideDisplay">
           <p id="p1CardName"></p>
@@ -85,6 +85,13 @@
         </div>
         <hr />
         <div id="bottomDeck"></div>
+      </div>
+    </div>
+    <div class="gameOver noDisplay">
+      <div class="gameOverModal">
+        <h2>Game Over!!</h2>
+        <p id="gameResult"></p>
+        <button id="playAgain">Play Again</button>
       </div>
     </div>
     <script src="./script.js"></script>

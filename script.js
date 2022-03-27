@@ -82,11 +82,18 @@ const pickCard = document.querySelector("#pickCard");
 const fightChallenge = document.querySelector("#fightChallenge");
 const runChallenge = document.querySelector("#runChallenge");
 const playChallenge = document.querySelector("#playChallenge");
+const computerRound = document.querySelector("#computerRound");
 let playerStatus = document.querySelector("#playerStatus");
 let computerStatus = document.querySelector("#computerStatus");
 let limboStatus = document.querySelector("#limboStatus");
 const gameStatus = document.querySelector("#gameStatus");
-
+const gameOver = document.querySelector(".gameOver");
+var gameResult = document.querySelector("#gameResult");
+const playAgain = document.querySelector("#playAgain");
+const coinFlip = document.querySelector("#flipCoin");
+//
+//players DOM variables
+//
 let playerDeck = document.querySelector("#bottomDeck");
 let playerCard = document.querySelector("#p1Card");
 let playerCardName = document.querySelector("#p1CardName");
@@ -117,6 +124,7 @@ class player {
         player1.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.fight < computer.Card.fight) {
       gameStatus.textContent = `Traveller wins the round!`;
@@ -125,10 +133,16 @@ class player {
         computer.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayLose();
       playerTurn = false;
     } else if (player1.Card.fight === computer.Card.fight) {
       limbo.push(player1.Card, computer.Card);
       gameStatus.textContent = `Draw! cards in the limbo!`;
+      if (playerTurn) {
+        optionDisplayWin();
+      } else {
+        optionDisplayLose();
+      }
     }
   }
   run() {
@@ -139,6 +153,7 @@ class player {
         player1.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.speed < computer.Card.speed) {
       gameStatus.textContent = `Traveller wins the round!`;
@@ -147,10 +162,16 @@ class player {
         computer.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayLose();
       playerTurn = false;
     } else if (player1.Card.speed === computer.Card.speed) {
       limbo.push(player1.Card, computer.Card);
       gameStatus.textContent = `Draw! cards in the limbo!`;
+      if (playerTurn) {
+        optionDisplayWin();
+      } else {
+        optionDisplayLose();
+      }
     }
   }
   trick() {
@@ -161,6 +182,7 @@ class player {
         player1.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.intelligence < computer.Card.intelligence) {
       gameStatus.textContent = `Traveller wins the round!`;
@@ -169,10 +191,16 @@ class player {
         computer.Deck.push(...limbo);
         limbo = [];
       }
+      optionDisplayLose();
       playerTurn = false;
     } else if (player1.Card.intelligence === computer.Card.intelligence) {
       limbo.push(player1.Card, computer.Card);
       gameStatus.textContent = `Draw! cards in the limbo!`;
+      if ((playerTurn = true)) {
+        optionDisplayWin();
+      } else {
+        optionDisplayLose();
+      }
     }
   }
 }
@@ -181,25 +209,24 @@ computer.name = "Traveller";
 let player1 = new player();
 let limbo = [];
 let playerTurn = true;
-var user1Deck = player1.Deck;
-var user2Deck = computer.Deck;
-let currentplayer = nameButton.addEventListener("click", () => {
-  player1.name = namePrompt.value;
-  playerName.textContent = `${player1.name}`;
-  nameDiv.classList.add("noDisplay");
-  introDiv.classList.remove("noDisplay");
-  welcomeMessage.innerHTML = ` ${player1.name}... Let's play a <br /> Cards game!!`;
-});
+var player1Deck;
+var player2Deck;
+
+//
 //Functions
-function coinFlip() {
+//
+function coinToss() {
   const coinSides = ["head", "cross"];
   let coinSide = coinSides[Math.floor(Math.random() * coinSides.length)];
-  console.log(coinSide);
   if ((coinSide = "head")) {
-    playerTurn = true;
+    pickCard.classList.remove("noDisplay");
+    gameStatus.textContent = `Head! ${player1.Name} goes first!`;
   } else {
-    playerTurn = false;
+    computerRound.classList.remove("noDisplay");
+    gameStatus.textContent = `Cross! Traveller goes first!`;
   }
+  console.log(coinSide);
+  coinFlip.classList.add("noDisplay");
 }
 function updateStatus() {
   playerStatus.textContent =
@@ -207,12 +234,21 @@ function updateStatus() {
   computerStatus.textContent = `Traveller ` + `Cards: ${computer.Deck.length}`;
   limboStatus.textContent = `Limbo Cards: ${limbo.length}`;
 }
-function optionDisplay() {
+function optionDisplayWin() {
   computerCard.classList.remove("hideDisplay");
   pickCard.classList.remove("noDisplay");
   fightChallenge.classList.add("noDisplay");
   runChallenge.classList.add("noDisplay");
   playChallenge.classList.add("noDisplay");
+  computerRound.classList.add("noDisplay");
+}
+function optionDisplayLose() {
+  computerCard.classList.remove("hideDisplay");
+  pickCard.classList.add("noDisplay");
+  fightChallenge.classList.add("noDisplay");
+  runChallenge.classList.add("noDisplay");
+  playChallenge.classList.add("noDisplay");
+  computerRound.classList.remove("noDisplay");
 }
 function playerDisplayDeck(user1Deck) {
   user1Deck.forEach(() => {
@@ -257,73 +293,6 @@ function playersPickCard() {
   computerDeck.innerHTML = "";
   computerDisplayDeck(user2Deck);
 }
-//Event listeners
-startGame.addEventListener("click", () => {
-  var freshDeck = new deck();
-  freshDeck.shuffleDeck();
-  player1.Deck = freshDeck.cards.slice(0, 10);
-  computer.Deck = freshDeck.cards.slice(10, 20);
-  introDiv.classList.add("noDisplay");
-  gameDiv.classList.remove("noDisplay");
-  gameStatus.textContent = `Pick a card!`;
-  updateStatus();
-  user1Deck = player1.Deck;
-  playerDisplayDeck(user1Deck);
-  user2Deck = computer.Deck;
-  computerDisplayDeck(user2Deck);
-});
-pickCard.addEventListener("click", () => {
-  playersPickCard();
-});
-fightChallenge.addEventListener("click", () => {
-  player1.fight();
-  optionDisplay();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  if (user1Deck.length === 0) {
-    console.log("Player 2 wins");
-  } else if (user2Deck.length === 0) {
-    console.log("Player 1 wins");
-  }
-});
-runChallenge.addEventListener("click", () => {
-  player1.run();
-  optionDisplay();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  if (user1Deck.length === 0) {
-    console.log("Player 2 wins");
-  } else if (user2Deck.length === 0) {
-    console.log("Player 1 wins");
-  }
-});
-playChallenge.addEventListener("click", () => {
-  player1.trick();
-  optionDisplay();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  if (user1Deck.length === 0) {
-    console.log("Player 2 wins");
-  } else if (user2Deck.length === 0) {
-    console.log("Player 1 wins");
-  }
-});
-//Computer A.I.
 function computerTurn() {
   playersPickCard();
   user1Deck = player1.Deck;
@@ -345,13 +314,107 @@ function computerTurn() {
     player1.trick();
     console.log("tricked");
   }
-  optionDisplay();
-  if (user1Deck.length === 0) {
-    console.log("game over, you lost");
-  } else if (user2Deck.length === 0) {
-    console.log("game over, you win");
+  updateStatus();
+  checkGameOver();
+}
+function checkGameOver() {
+  if (player1.Deck.length === 0) {
+    console.log("Player 2 wins");
+    gameOver.classList.remove("noDisplay");
+    gameDiv.classList.add("noDisplay");
+    gameResult.textContent = "You Lost, got to practice a bit!";
+  }
+  if (computer.Deck.length === 0) {
+    console.log("Player 1 wins");
+    gameOver.classList.remove("noDisplay");
+    gameDiv.classList.add("noDisplay");
+    gameResult.textContent = "You won!.. but don't get too high on yourself. ";
   }
 }
-while ((playerTurn = false)) {
+//
+//Event listeners
+//
+let currentplayer = nameButton.addEventListener("click", () => {
+  player1.name = namePrompt.value;
+  playerName.textContent = `${player1.name}`;
+  nameDiv.classList.add("noDisplay");
+  introDiv.classList.remove("noDisplay");
+  welcomeMessage.innerHTML = ` ${player1.name}... Let's play a <br /> Cards game!!`;
+});
+startGame.addEventListener("click", () => {
+  var freshDeck = new deck();
+  freshDeck.shuffleDeck();
+  player1.Deck = freshDeck.cards.slice(0, 10);
+  computer.Deck = freshDeck.cards.slice(10, 20);
+  introDiv.classList.add("noDisplay");
+  gameDiv.classList.remove("noDisplay");
+  playerCard.classList.add("hideDisplay");
+  computerCard.classList.add("hideDisplay");
+  coinFlip.classList.remove("noDisplay");
+  pickCard.classList.add("noDisplay");
+  updateStatus();
+  user1Deck = player1.Deck;
+  playerDisplayDeck(user1Deck);
+  user2Deck = computer.Deck;
+  computerDisplayDeck(user2Deck);
+  player1.Card = undefined;
+  computer.Card = undefined;
+});
+coinFlip.addEventListener("click", () => {
+  coinToss();
+});
+pickCard.addEventListener("click", () => {
+  playersPickCard();
+});
+fightChallenge.addEventListener("click", () => {
+  player1.fight();
+  updateStatus();
+  user1Deck = player1.Deck;
+  user2Deck = computer.Deck;
+  playerDeck.innerHTML = "";
+  playerDisplayDeck(user1Deck);
+  computerDeck.innerHTML = "";
+  computerDisplayDeck(user2Deck);
+  player1.Card = undefined;
+  computer.Card = undefined;
+  checkGameOver();
+});
+runChallenge.addEventListener("click", () => {
+  player1.run();
+  updateStatus();
+  user1Deck = player1.Deck;
+  user2Deck = computer.Deck;
+  playerDeck.innerHTML = "";
+  playerDisplayDeck(user1Deck);
+  computerDeck.innerHTML = "";
+  computerDisplayDeck(user2Deck);
+  player1.Card = undefined;
+  computer.Card = undefined;
+  checkGameOver();
+});
+playChallenge.addEventListener("click", () => {
+  player1.trick();
+  updateStatus();
+  user1Deck = player1.Deck;
+  user2Deck = computer.Deck;
+  playerDeck.innerHTML = "";
+  playerDisplayDeck(user1Deck);
+  computerDeck.innerHTML = "";
+  computerDisplayDeck(user2Deck);
+  player1.Card = undefined;
+  computer.Card = undefined;
+  checkGameOver();
+});
+computerRound.addEventListener("click", () => {
   computerTurn();
-}
+  updateStatus();
+  player1.Card = undefined;
+  computer.Card = undefined;
+  checkGameOver();
+});
+playAgain.addEventListener("click", () => {
+  gameOver.classList.add("noDisplay");
+  introDiv.classList.remove("noDisplay");
+  welcomeMessage.innerHTML = `${player1.name}, Let's play again!!`;
+  freshDeck = undefined;
+});
