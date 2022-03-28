@@ -118,7 +118,7 @@ class player {
   }
   fight() {
     if (player1.Card.fight > computer.Card.fight) {
-      gameStatus.textContent = `${player1.name} wins the round!`;
+      gameStatus.textContent = `They fighted! ${player1.name} wins the round!`;
       player1.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         player1.Deck.push(...limbo);
@@ -127,7 +127,7 @@ class player {
       optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.fight < computer.Card.fight) {
-      gameStatus.textContent = `Traveller wins the round!`;
+      gameStatus.textContent = `They fighted! Traveller wins the round!`;
       computer.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         computer.Deck.push(...limbo);
@@ -137,7 +137,7 @@ class player {
       playerTurn = false;
     } else if (player1.Card.fight === computer.Card.fight) {
       limbo.push(player1.Card, computer.Card);
-      gameStatus.textContent = `Draw! cards in the limbo!`;
+      gameStatus.textContent = `They fighted! Draw, cards in the limbo!`;
       if (playerTurn) {
         optionDisplayWin();
       } else {
@@ -147,7 +147,7 @@ class player {
   }
   run() {
     if (player1.Card.speed > computer.Card.speed) {
-      gameStatus.textContent = `${player1.name} wins the round!`;
+      gameStatus.textContent = `They runned! ${player1.name} wins the round!`;
       player1.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         player1.Deck.push(...limbo);
@@ -156,7 +156,7 @@ class player {
       optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.speed < computer.Card.speed) {
-      gameStatus.textContent = `Traveller wins the round!`;
+      gameStatus.textContent = `They runned! Traveller wins the round!`;
       computer.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         computer.Deck.push(...limbo);
@@ -166,7 +166,7 @@ class player {
       playerTurn = false;
     } else if (player1.Card.speed === computer.Card.speed) {
       limbo.push(player1.Card, computer.Card);
-      gameStatus.textContent = `Draw! cards in the limbo!`;
+      gameStatus.textContent = `They runned! Draw, cards in the limbo!`;
       if (playerTurn) {
         optionDisplayWin();
       } else {
@@ -176,7 +176,7 @@ class player {
   }
   trick() {
     if (player1.Card.intelligence > computer.Card.intelligence) {
-      gameStatus.textContent = `${player1.name} wins the round!`;
+      gameStatus.textContent = `A fantastic trick! ${player1.name} wins the round!`;
       player1.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         player1.Deck.push(...limbo);
@@ -185,7 +185,7 @@ class player {
       optionDisplayWin();
       playerTurn = true;
     } else if (player1.Card.intelligence < computer.Card.intelligence) {
-      gameStatus.textContent = `Traveller wins the round!`;
+      gameStatus.textContent = `A fantastic trick! Traveller wins the round!`;
       computer.Deck.push(player1.Card, computer.Card);
       if (limbo.length != 0) {
         computer.Deck.push(...limbo);
@@ -195,7 +195,7 @@ class player {
       playerTurn = false;
     } else if (player1.Card.intelligence === computer.Card.intelligence) {
       limbo.push(player1.Card, computer.Card);
-      gameStatus.textContent = `Draw! cards in the limbo!`;
+      gameStatus.textContent = `A trick! but it's a Draw! cards in the limbo!`;
       if ((playerTurn = true)) {
         optionDisplayWin();
       } else {
@@ -218,7 +218,7 @@ var player2Deck;
 function coinToss() {
   const coinSides = ["head", "cross"];
   let coinSide = coinSides[Math.floor(Math.random() * coinSides.length)];
-  if ((coinSide = "head")) {
+  if (coinSide == "head") {
     pickCard.classList.remove("noDisplay");
     gameStatus.textContent = `Head! ${player1.Name} goes first!`;
   } else {
@@ -331,6 +331,18 @@ function checkGameOver() {
     gameResult.textContent = "You won!.. but don't get too high on yourself. ";
   }
 }
+function update() {
+  updateStatus();
+  user1Deck = player1.Deck;
+  user2Deck = computer.Deck;
+  playerDeck.innerHTML = "";
+  playerDisplayDeck(user1Deck);
+  computerDeck.innerHTML = "";
+  computerDisplayDeck(user2Deck);
+  player1.Card = undefined;
+  computer.Card = undefined;
+  checkGameOver();
+}
 //
 //Event listeners
 //
@@ -368,42 +380,15 @@ pickCard.addEventListener("click", () => {
 });
 fightChallenge.addEventListener("click", () => {
   player1.fight();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  player1.Card = undefined;
-  computer.Card = undefined;
-  checkGameOver();
+  update();
 });
 runChallenge.addEventListener("click", () => {
   player1.run();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  player1.Card = undefined;
-  computer.Card = undefined;
-  checkGameOver();
+  update();
 });
 playChallenge.addEventListener("click", () => {
   player1.trick();
-  updateStatus();
-  user1Deck = player1.Deck;
-  user2Deck = computer.Deck;
-  playerDeck.innerHTML = "";
-  playerDisplayDeck(user1Deck);
-  computerDeck.innerHTML = "";
-  computerDisplayDeck(user2Deck);
-  player1.Card = undefined;
-  computer.Card = undefined;
-  checkGameOver();
+  update();
 });
 computerRound.addEventListener("click", () => {
   computerTurn();
@@ -417,4 +402,6 @@ playAgain.addEventListener("click", () => {
   introDiv.classList.remove("noDisplay");
   welcomeMessage.innerHTML = `${player1.name}, Let's play again!!`;
   freshDeck = undefined;
+  computerDeck.innerHTML = "";
+  playerDeck.innerHTML = "";
 });

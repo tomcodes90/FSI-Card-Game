@@ -55,10 +55,8 @@ hr {
 #startGame {
   margin: 0px auto;
 }
-#nameButton,
-#startGame,
-.playButtons > *,
-.gameOverModal button {
+button,
+#nameButton {
   padding: 10px 30px;
   border: 0.1px solid;
   border-radius: 20px;
@@ -66,6 +64,10 @@ hr {
   color: white;
   background-color: rgba(119, 4, 4, 0.9);
   text-transform: uppercase;
+}
+button:hover,
+#nameButton:hover {
+  background-color: rgba(90, 4, 4, 0.9);
 }
 
 .greetings1 {
